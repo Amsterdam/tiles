@@ -15,7 +15,7 @@ https://t-rex.tileserver.ch/
 
 - To generate a new version for config.toml do:
 
-`docker-compose run t_rex genconfig --dbconn postgresql://basiskaart:insecure@database/basiskaart > config/config.toml.template`
+`docker-compose run trex genconfig --dbconn postgresql://basiskaart:insecure@database/basiskaart > config/config.toml.template`
 
 Before runnning the tileserver, make sure it can actually cache the files to disk
 
@@ -25,19 +25,18 @@ Before runnning the tileserver, make sure it can actually cache the files to dis
 
 - Run T-Rex tileserver:
 
-`docker-compose run -p 6767:6767 t_rex serve --config  /var/config/config.toml`
+`docker-compose run -p 6767:6767 trex serve --config  /var/config/config.toml`
 
 or to use the new mview
 
-`docker-compose run -p 6767:6767 t_rex serve --config  /var/config/topo_wm.toml` 
+`docker-compose run -p 6767:6767 trex serve --config  /var/config/topo_wm.toml` 
 
 - Then go to :
  
  `http://localhost:6767/`
  
  or 
- 
- 
+  
  `http://localhost:6767/static/leaflet.html`
  
  or
@@ -47,7 +46,7 @@ or to use the new mview
 
  - to generate vector tiles cache, run cmd:
 
-`docker-compose run t_rex generate --maxzoom 16 --config  /var/config/topo_wm.toml`
+`docker-compose run trex generate --maxzoom 16 --config  /var/config/topo_wm.toml`
   
  - Create mbtiles file  (optional)
 
@@ -67,7 +66,7 @@ This can be done in the mbtiles file with :
 
 - Run Tileserver GL 
 
-`docker-compose up -d tileserver_gl`
+`docker-compose up -d tileserver`
 
 Then we can see results on:
 
@@ -88,18 +87,18 @@ cat /etc/hosts
 ...
 ```
 
-But then Tileserver GL serves the T-Rex vector tiles directly in :
+But then Tileserver GL serves the T-Rex vector tiles directly in:
 
 `http://localhost:8080/styles/basic/?vector#12/52.37875/4.87371`
 
 - Generate png tiles with mapproxy
 
-Build topo_wm mapproxy image :
+Build mapproxy seed image:
 
-`docker-compose build topo_wm`
+`docker-compose build mapproxy_wm_seed`
 
-Then run the maproxy seeding :
+Then run the maproxy seeding:
 
-`docker-compose run topo_wm`
+`docker-compose run mapproxy_wm_seed`
 
 The resulting tiles are in the ./tiles subdirectory

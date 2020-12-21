@@ -18,9 +18,9 @@ services:
     links:
       - database
     environment:
-      - DATABASE_NAME=basiskaart
-      - DATABASE_USER=basiskaart
-      - DATABASE_PASSWORD=insecure
+      DATABASE_NAME: basiskaart
+      DATABASE_USER: basiskaart
+      DATABASE_PASSWORD: insecure
     volumes:
       - "$PWD/trex/data/in:/var/data/in:ro"
       - "$PWD/trex/data/out:/var/data/out"
