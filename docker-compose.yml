@@ -1,0 +1,67 @@
+version: "3.0"
+services:
+  database:
+    image: amsterdam/postgres11
+    volumes:
+      - "$PWD/config/database:/database"
+    ports:
+      - "5402:5432"
+    environment:
+      POSTGRES_DB: basiskaart
+      POSTGRES_USER: basiskaart
+      POSTGRES_PASSWORD: insecure
+
+  trex:
+    image: sourcepole/t-rex
+    ports:
+      - "6767:6767"
+    links:
+      - database
+    environment:
+      - DATABASE_NAME=basiskaart
+      - DATABASE_USER=basiskaart
+      - DATABASE_PASSWORD=insecure
+    volumes:
+      - "$PWD/trex/data/in:/var/data/in:ro"
+      - "$PWD/trex/data/out:/var/data/out"
+      - "$PWD/trex/config:/var/config:ro"
+      - "$PWD/trex/cache:/var/cache/mvtcache"
+      - "$PWD/tileserver/static:/static"
+    command: serve --config /var/config/topo_wm.toml
+    # command: generate --maxzoom 16 --config  /var/config/topo_wm.toml
+
+  tileserver:
+    image: maptiler/tileserver-gl
+    ports:
+      - "8080:80"
+    volumes:
+      - "$PWD/data:/data"
+      - "$PWD/tileserver/config:/var/config:ro"
+      - "$PWD/tileserver/static:/var/static:ro"
+    command: run.sh --verbose -c /var/config/tileserver_cfg.json
+
+  mapproxy:
+    build: 
+      context: mapproxy
+    ports:
+      - "8000:8000"
+    links: 
+      - tileserver
+    volumes:
+      - "$PWD/mapproxy/config:/var/config:ro"
+    environment:
+      UWSGI_HTTP: "0.0.0.0:8000"
+      UWSGI_MASTER: 1
+      UWSGI_PROCESSES: 4
+
+  mapproxy_wm_seed:
+    build:
+      context: mapproxy
+    user: root
+    links:
+      - tileserver
+    volumes:
+      - "$PWD/mapproxy/config:/var/config:ro"
+      - "$PWD/tiles:/mnt/tiles"
+    command: >
+      mapproxy-seed -c 4 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=wm_kbk

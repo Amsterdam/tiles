@@ -1,0 +1,88 @@
+services:
+  demo:
+  wmts:
+    md:
+      # metadata used in capabilities documents
+      title: Data en Informatie Amsterdam
+      abstract: Map tile service Gemeente Amsterdam
+      online_resource: https://data.amsterdam.nl/
+      contact:
+        person: n/a
+        position: n/a
+        organization: Gemeente Amsterdam
+        address: n/a
+        city: Amsterdam
+        postcode: n/a
+        country: Netherlands
+        phone: n/a
+        fax: n/a
+        email: datapunt@amsterdam.nl
+        fees: 'None'
+    restful: false
+    kvp: true
+
+layers:
+  - name: wm
+    title: Basiskaart Amsterdam (Web Mercator)
+    md:
+      abstract: Basiskaart Amsterdam in Web Mercator projectie
+    sources: [cache_wm_live]
+
+caches:
+#### TOPO Webmercator (wm) - KBK & BGT - Standaard kleur
+  cache_wm_live:
+    grids: [webmercator]
+    sources: [wm_server, wm_tiles]
+    disable_storage: true
+
+  cache_wm_seed:
+    grids: [webmercator]
+    sources: [wm_server_all]
+    cache_dir: /mnt/tiles
+    cache:
+      type: file
+      directory_layout: tms
+
+sources:
+  wm_server:
+    type: tile
+    grid: webmercator
+    url: http://SERVICE_URL_REPLACE:8080/styles/basic/%(z)s/%(x)s/%(y)s.png
+    min_res: 3.2
+  wm_tiles:
+    type: tile
+    grid: webmercator
+    url: https://BLOB_URL_REPLACE/testtiles/topo_wm_cache_EPSG3857/%(z)s/%(x)s/%(y)s.png
+    max_res: 3.2
+  wm_server_all:
+    type: tile
+    grid: webmercator
+    url: http://SERVICE_URL_REPLACE:8080/styles/basic/%(z)s/%(x)s/%(y)s.png    
+    seed_only: true
+
+grids:
+  nl_grid:
+    srs: EPSG:28992
+    tile_size: [256,256]
+    origin: sw
+    res: [3440.64,1720.32,860.16,430.08,215.04,107.52,53.76,26.88,13.44,6.72,3.36,1.68,0.84,0.42,0.21,0.105,0.0525]
+    #     0       1       2      3      4      5      6     7     8     9    10   11   12   13   14   15    16
+    bbox: [-285401.920,22598.080,595401.9199999999,903401.9199999999]
+
+  webmercator:
+    base: GLOBAL_WEBMERCATOR
+    num_levels: 22
+
+globals:
+  cache:
+    base_dir: '/app'
+    lock_dir: '/app'
+    tile_lock_dir: '/app'
+    meta_size: [4, 4]
+    meta_buffer: 254
+  http:
+    ssl_no_cert_checks: True
+    client_timeout: 100
+
+  image:
+    resampling_method: bicubic

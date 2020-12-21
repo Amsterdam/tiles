@@ -1,0 +1,33 @@
+seeds:
+
+#### TOPO wm - KBK & BGT - Standaard kleur
+  wm_kbk:
+    caches: [cache_wm_seed]
+    grids: [webmercator]
+    coverages: ['kbk']
+    levels:
+      from: 11
+      to: 16
+    refresh_before:
+      days: 7
+#      minutes: 15
+
+  wm_bgt:
+    caches: [cache_wm_seed]
+    grids: [webmercator]
+    coverages: ['bgt']
+    levels:
+     from: 17
+     # TODO : 21 needs a special tileserver_gl version. See README
+     to: 20
+    refresh_before:
+     days: 7
+#     minutes: 15
+
+coverages:
+  kbk:
+    bbox: [94100,464250,170000,514160]
+    srs: 'EPSG:28992'
+  bgt:
+    bbox: [104000,474000,136000,502100]
+    srs: 'EPSG:28992'
