@@ -47,17 +47,17 @@ sources:
   wm_server:
     type: tile
     grid: webmercator
-    url: http://SERVICE_URL_REPLACE:8080/styles/basic/%(z)s/%(x)s/%(y)s.png
+    url: http://REPLACE_SERVICE_URL_REPLACE:8080/styles/basic/%(z)s/%(x)s/%(y)s.png
     min_res: 3.2
   wm_tiles:
     type: tile
     grid: webmercator
-    url: https://BLOB_URL_REPLACE/testtiles/topo_wm_cache_EPSG3857/%(z)s/%(x)s/%(y)s.png
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/%(z)s/%(x)s/%(y)s.png
     max_res: 3.2
   wm_server_all:
     type: tile
     grid: webmercator
-    url: http://SERVICE_URL_REPLACE:8080/styles/basic/%(z)s/%(x)s/%(y)s.png    
+    url: http://REPLACE_SERVICE_URL_REPLACE:8080/styles/basic/%(z)s/%(x)s/%(y)s.png    
     seed_only: true
 
 grids:

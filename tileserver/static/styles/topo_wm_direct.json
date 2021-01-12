@@ -5,7 +5,7 @@
     "sources": {
         "basiskaart": {
             "type": "vector",
-            "url": "https://BLOB_URL_REPLACE/tiles/tilejson_direct.json"
+            "url": "https://REPLACE_BLOB_URL_REPLACE/tiles/tilejson_direct.json"
         }
     },
     "layers": [

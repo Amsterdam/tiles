@@ -17,7 +17,7 @@
   "name":"basiskaart",
   "scheme":"xyz",
   "tiles": [
-    "https://BLOB_URL_REPLACE/tiles/pbf/bgt_vw/{z}/{x}/{y}.pbf"
+    "https://REPLACE_BLOB_URL_REPLACE/tiles/pbf/bgt_vw/{z}/{x}/{y}.pbf"
   ],
   "version":"2.0.0"
 }

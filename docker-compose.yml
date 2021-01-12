@@ -15,8 +15,8 @@ services:
     image: sourcepole/t-rex
     ports:
       - "6767:6767"
-    links:
-      - database
+    # links:
+    #   - database
     environment:
       DATABASE_NAME: basiskaart
       DATABASE_USER: basiskaart
@@ -33,12 +33,12 @@ services:
   tileserver:
     image: maptiler/tileserver-gl
     ports:
-      - "8080:80"
+      - "8080:8080"
     volumes:
       - "$PWD/data:/data"
       - "$PWD/tileserver/config:/var/config:ro"
       - "$PWD/tileserver/static:/var/static:ro"
-    command: run.sh --verbose -c /var/config/tileserver_cfg.json
+    command: -p 8080 --verbose -c /var/config/tileserver_cfg.json
 
   mapproxy:
     build: 

@@ -2,9 +2,9 @@
 
 T-REX vector tile creation
 
-https://t-rex.tileserver.ch/
+`https://t-rex.tileserver.ch/`
 
-- For now we start by importing the latest version of the basiskaart db 
+- For now we start by importing the latest version of the basiskaart db
 
 `docker-compose up -d database`  
 `docker-compose exec database update-db.sh basiskaart`
@@ -29,42 +29,40 @@ Before runnning the tileserver, make sure it can actually cache the files to dis
 
 or to use the new mview
 
-`docker-compose run -p 6767:6767 trex serve --config  /var/config/topo_wm.toml` 
+`docker-compose run -p 6767:6767 trex serve --config  /var/config/topo_wm.toml`
 
 - Then go to :
- 
+
  `http://localhost:6767/`
- 
- or 
+
+ or
   
  `http://localhost:6767/static/leaflet.html`
- 
- or
- 
- `http://localhost:6767/static/leaflet_topo_wm.html`
- 
 
- - to generate vector tiles cache, run cmd:
+ or
+
+ `http://localhost:6767/static/leaflet_topo_wm.html`
+
+- to generate vector tiles cache, run cmd:
 
 `docker-compose run trex generate --maxzoom 16 --config  /var/config/topo_wm.toml`
   
- - Create mbtiles file  (optional)
+- Create mbtiles file  (optional)
 
 MB tiles is not really required. It is possible refer directly from Tileserver GL to T-rex.
 But for completeness we include this here. First install mb-util from :
 
-https://github.com/mapbox/mbutil
+`https://github.com/mapbox/mbutil`
 
 `mb-util --image_format=pbf cache/bgt_vw data/bgt_vw.mbtiles`
 
-T-Rex writes the bounds and center in metdata.json with square brackets  around the array. 
+T-Rex writes the bounds and center in metdata.json with square brackets  around the array.
 But Tilserver-GL expects these arrays without square brackets. So we have to opdate the metadata.
-This can be done in the mbtiles file with : 
+This can be done in the mbtiles file with:
 
-`echo "update metadata set value=trim(trim(value,'['), ']') where name in (\"bounds\", \"center\")" | sqlite3 data/bgt_vw.mbtiles
-`
+`echo "update metadata set value=trim(trim(value,'['), ']') where name in (\"bounds\", \"center\")" | sqlite3 data/bgt_vw.mbtiles`
 
-- Run Tileserver GL 
+- Run Tileserver GL
 
 `docker-compose up -d tileserver`
 
@@ -83,7 +81,7 @@ cat /etc/hosts
 ```\#
 \# Host Database
 \#
-127.0.0.1	localhost MacBook-Pro-FromMe.local t_rex
+127.0.0.1   localhost MacBook-Pro-FromMe.local t_rex
 ...
 ```
 
