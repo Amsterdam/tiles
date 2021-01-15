@@ -20,6 +20,10 @@ services:
         fees: 'None'
     restful: false
     kvp: true
+  tms:
+    use_grid_names: true
+    # origin for /tiles service
+    origin: 'nw'
 
 layers:
   - name: wm
