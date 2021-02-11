@@ -1,0 +1,25 @@
+{
+  "attribution":"<a href=\"https://data.amsterdam.nl\">Gemeente Amsterdam</a>",
+  "bounds":[
+    4.63974,
+    52.25158,
+    5.10768,
+    52.50593
+  ],
+  "center":[
+    4.891438,
+    52.373012,
+    12
+  ],
+  "description":"Topografie Amsterdam (WM)",
+  "format": "pbf",
+  "maxzoom":16,
+  "minzoom":10,
+  "name":"topo_wm",
+  "scheme":"xyz",
+  "tilejson": "2.2.0",
+  "tiles": [
+    "https://REPLACE_BLOB_URL_REPLACE/tiles/wm/pbf/bgt_vw/{z}/{x}/{y}.pbf"
+  ],
+  "version":"1.0.0"
+}

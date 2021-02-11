@@ -3,7 +3,7 @@
 viewer = true
 
 [[datasource]]
-dbconn = "postgresql://basiskaart:insecure@database/basiskaart"
+dbconn = "postgresql://{{env.DATABASE_USER}}:{{env.DATABASE_PASSWORD}}@{{env.DATABASE_HOST}}/{{env.DATABASE_NAME}}"
 name = "dbconn"
 default = true
 
@@ -230,10 +230,9 @@ tile_size = 512
 bind = "0.0.0.0"
 port = 6767
 
-#[cache.file]
-# base = "/var/cache/mvtcache"
+[cache.file]
+base = "/var/cache/mvtcache"
 
 [[webserver.static]]
 path = "/static"
 dir = "/static"
-
