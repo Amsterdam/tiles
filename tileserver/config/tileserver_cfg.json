@@ -1,9 +1,9 @@
 {
   "options": {
     "paths": {
-      "root": "https://REPLACE_BLOB_URL_REPLACE/tiles/",
-      "fonts": "fonts",
-      "styles": "styles"
+      "root": "",
+      "fonts": "https://REPLACE_BLOB_URL_REPLACE/tiles/fonts",
+      "styles": "../static/styles"
     }
   },
   "styles": {
