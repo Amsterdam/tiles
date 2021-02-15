@@ -1,7 +1,7 @@
 {
     "version": 8,
     "name": "topo_rd_light",
-    "glyphs": "{fontstack}/{range}.pbf",
+    "glyphs": "https://REPLACE_BLOB_URL_REPLACE/tiles/fonts/{fontstack}/{range}.pbf",
     "sources": {
         "basiskaart": {
             "type": "vector",
