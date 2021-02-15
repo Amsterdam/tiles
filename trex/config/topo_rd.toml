@@ -19,7 +19,7 @@ origin = "TopLeft"
 
 [[tileset]]
 name = "basiskaart_rd"
-extent = [104000,474000,136000,502100]
+extent = [94100,464250,170000,514160]
 minzoom = 0
 cache_limits = {minzoom = 0, maxzoom = 16, no_cache = false}
 

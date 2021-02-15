@@ -1,7 +1,7 @@
 {
   "options": {
     "paths": {
-      "root": "../static",
+      "root": "https://REPLACE_BLOB_URL_REPLACE/tiles/",
       "fonts": "fonts",
       "styles": "styles"
     }

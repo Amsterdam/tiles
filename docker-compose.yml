@@ -24,7 +24,9 @@ services:
       - "$PWD/trex/cache:/var/cache/mvtcache/wm"
       - "$PWD/tileserver/static:/static"
     # command: serve --config /var/config/topo_wm.toml
-    command: generate --maxzoom 16 --config  /var/config/topo_wm.toml
+    # command: generate --maxzoom 16 --config  /var/config/topo_wm.toml
+    # command: generate --maxzoom 11 --config  /var/config/topo_rd.toml
+    command: generate --minzoom=10 --maxzoom=10 --extent 4.64033750451671,52.2516789054116,5.10736113164264,52.5062589665124 --config /var/config/topo_rd.toml --loglevel info
 
   tileserver:
     image: maptiler/tileserver-gl
