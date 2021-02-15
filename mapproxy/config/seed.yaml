@@ -26,7 +26,7 @@ seeds:
 
 #### TOPO WM - KBK - LIGHT STYLE
   wm_kbk_light:
-    caches: [cache_wm_seed_zw]
+    caches: [cache_wm_seed_light]
     grids: [webmercator]
     coverages: ['kbk']
     levels:

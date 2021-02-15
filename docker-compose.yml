@@ -17,18 +17,14 @@ services:
       - "6767:6767"
     # links:
     #   - database
-    environment:
-      DATABASE_NAME: basiskaart
-      DATABASE_USER: basiskaart
-      DATABASE_PASSWORD: insecure
     volumes:
       - "$PWD/trex/data/in:/var/data/in:ro"
       - "$PWD/trex/data/out:/var/data/out"
       - "$PWD/trex/config:/var/config:ro"
-      - "$PWD/trex/cache:/var/cache/mvtcache"
+      - "$PWD/trex/cache:/var/cache/mvtcache/wm"
       - "$PWD/tileserver/static:/static"
-    command: serve --config /var/config/topo_wm.toml
-    # command: generate --maxzoom 16 --config  /var/config/topo_wm.toml
+    # command: serve --config /var/config/topo_wm.toml
+    command: generate --maxzoom 16 --config  /var/config/topo_wm.toml
 
   tileserver:
     image: maptiler/tileserver-gl
