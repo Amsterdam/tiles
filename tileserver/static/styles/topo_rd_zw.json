@@ -982,32 +982,9 @@
             }
         },
         {
-            "id": "road-names",
-            "type": "symbol",
-            "source": "basiskaart",
-            "source-layer": "road_names",
-            "maxzoom": 11.9,
-            "minzoom": 9,
-            "layout": {
-                "text-max-angle": 40,
-                "text-padding": 2,
-                "text-size": 12,
-                "text-font": [
-                    "AvenirNextLTProBold"
-                ],
-                "text-field": ["upcase", ["to-string",["get", "wegnaam"]]],
-                "text-rotation-alignment": "map",
-                "symbol-placement": "line",
-                "symbol-spacing": 400
-            },
-            "paint": {
-                "text-color": "#787878"
-            }
-        },
-        {
             "id": "water-names",
             "source": "basiskaart",
-            "source-layer": "labels",
+            "source-layer": "labels_punt",
             "type": "symbol",
             "minzoom": 12,
             "maxzoom": 16,
@@ -1026,13 +1003,13 @@
                 "text-rotation-alignment": "map"
             },
             "paint": {
-                "text-color":  "#fff"
+                "text-color":  "#787878"
             }
         },
         {
             "id": "street-names",
             "source": "basiskaart",
-            "source-layer": "labels",
+            "source-layer": "labels_punt",
             "type": "symbol",
             "minzoom": 12,
             "maxzoom": 16,
@@ -1057,7 +1034,7 @@
         {
             "id": "kunstwerk",
             "source": "basiskaart",
-            "source-layer": "labels",
+            "source-layer": "labels_punt",
             "type": "symbol",
             "minzoom": 13,
             "maxzoom": 16,
@@ -1104,7 +1081,7 @@
         {
             "id": "landschappelijkgebied",
             "source": "basiskaart",
-            "source-layer": "labels",
+            "source-layer": "labels_punt",
             "type": "symbol",
             "minzoom": 12,
             "maxzoom": 16,
@@ -1155,7 +1132,7 @@
         {
             "id": "house_numbers",
             "source": "basiskaart",
-            "source-layer": "labels",
+            "source-layer": "labels_punt",
             "type": "symbol",
             "minzoom": 13,
             "maxzoom": 16,
@@ -1206,6 +1183,17 @@
             },
             "paint": {
                 "text-color": "#787878"
+            }
+        },
+        {
+            "id": "labels_small_scale",
+            "source": "basiskaart",
+            "source-layer": "labels_vlak",
+            "minzoom": 6,
+            "maxzoom": 11.9,
+            "type": "fill",
+            "paint": {
+                "fill-color": "#787878"
             }
         }
     ]

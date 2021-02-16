@@ -17,6 +17,11 @@ services:
       - "6767:6767"
     # links:
     #   - database
+    environment:
+      DATABASE_NAME: basiskaart
+      DATABASE_HOST: database
+      DATABASE_USER: basiskaart
+      DATABASE_PASSWORD: insecure
     volumes:
       - "$PWD/trex/data/in:/var/data/in:ro"
       - "$PWD/trex/data/out:/var/data/out"
@@ -62,4 +67,4 @@ services:
       - "$PWD/mapproxy/config:/var/config:ro"
       - "$PWD/tiles:/mnt/tiles"
     command: >
-      mapproxy-seed -c 4 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=wm_kbk
+      mapproxy-seed -c 4 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=wm_kbk,wm_bgt

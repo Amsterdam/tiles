@@ -21,7 +21,7 @@ services:
     restful: false
     kvp: true
   tms:
-    use_grid_names: true
+    use_grid_names: false
     # origin for /tiles service
     origin: 'nw'
 
@@ -179,7 +179,7 @@ sources:
   wm_tiles:
     type: tile
     grid: webmercator
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/%(z)s/%(x)s/%(y)s.png
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/default/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
@@ -201,7 +201,7 @@ sources:
   wm_tiles_zw:
     type: tile
     grid: webmercator
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm_zw/%(z)s/%(x)s/%(y)s.png
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/zw/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
@@ -223,7 +223,7 @@ sources:
   wm_tiles_light:
     type: tile
     grid: webmercator
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm_light/%(z)s/%(x)s/%(y)s.png
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/light/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
@@ -246,7 +246,7 @@ sources:
   rd_tiles:
     type: tile
     grid: nl_grid
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/%(z)s/%(x)s/%(y)s.png
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/default/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
@@ -268,7 +268,7 @@ sources:
   rd_tiles_zw:
     type: tile
     grid: nl_grid
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd_zw/%(z)s/%(x)s/%(y)s.png
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/zw/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
@@ -290,7 +290,7 @@ sources:
   rd_tiles_light:
     type: tile
     grid: nl_grid
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd_light/%(z)s/%(x)s/%(y)s.png
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/light/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
