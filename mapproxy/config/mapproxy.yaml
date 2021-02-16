@@ -27,33 +27,33 @@ services:
 
 layers:
 #### WM (Webmercator) Layers ####
-  - name: wm
+  - name: topo_wm
     title: Basiskaart Amsterdam (Web Mercator) - WM Default
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_wm_live]
-  - name: wm_zw
+  - name: topo_wm_zw
     title: Basiskaart Amsterdam (Web Mercator) - WM Zwart/Wit
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_wm_live_zw]
-  - name: wm_light
+  - name: topo_wm_light
     title: Basiskaart Amsterdam (Web Mercator) - WM Light
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_wm_live_light]
 #### RD (Rijksdriehoek) Layers ####
-  - name: rd
+  - name: topo_rd
     title: Basiskaart Amsterdam (Web Mercator) - RD Default
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_rd_live]
-  - name: rd_zw
+  - name: topo_rd_zw
     title: Basiskaart Amsterdam (Web Mercator) - RD Zwart/Wit
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_rd_live_zw]
-  - name: rd_light
+  - name: topo_rd_light
     title: Basiskaart Amsterdam (Web Mercator) - RD Light
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
