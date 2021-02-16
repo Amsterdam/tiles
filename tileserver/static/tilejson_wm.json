@@ -19,7 +19,7 @@
   "scheme":"xyz",
   "tilejson": "2.2.0",
   "tiles": [
-    "/data/wm/bgt_vw/{z}/{x}/{y}.pbf"
+    "https://REPLACE_BLOB_URL_REPLACE/tiles/wm/pbf/bgt_vw/{z}/{x}/{y}.pbf"
   ],
   "version":"1.0.0"
 }
