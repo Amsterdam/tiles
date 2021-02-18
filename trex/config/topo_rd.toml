@@ -18,7 +18,7 @@ resolutions = [3440.64,1720.32,860.16,430.08,215.04,107.52,53.76,26.88,13.44,6.7
 origin = "TopLeft"
 
 [[tileset]]
-name = "basiskaart_rd"
+name = "vector"
 extent = [94100,464250,170000,514160]
 minzoom = 0
 cache_limits = {minzoom = 0, maxzoom = 16, no_cache = false}

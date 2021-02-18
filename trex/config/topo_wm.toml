@@ -12,7 +12,7 @@ default = true
 predefined = "web_mercator"
 
 [[tileset]]
-name = "bgt_vw"
+name = "vector"
 extent = [4.63974, 52.25158, 5.10768, 52.50593]
 cache_limits = {minzoom = 0, maxzoom = 16, no_cache = false}
 
