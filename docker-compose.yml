@@ -67,4 +67,4 @@ services:
       - "$PWD/mapproxy/config:/var/config:ro"
       - "$PWD/tiles:/mnt/tiles"
     command: >
-      mapproxy-seed -c 4 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=wm_kbk,wm_bgt
+      mapproxy-seed -c 4 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=wm_kbk

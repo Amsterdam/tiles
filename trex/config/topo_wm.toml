@@ -13,8 +13,8 @@ predefined = "web_mercator"
 
 [[tileset]]
 name = "vector"
-extent = [4.63974, 52.25158, 5.10768, 52.50593]
-cache_limits = {minzoom = 0, maxzoom = 16, no_cache = false}
+extent = [4.49712476945351, 52.1630507756721, 5.60867873764429, 52.6147675426215]
+cache_limits = {minzoom = 0, maxzoom = 22, no_cache = false}
 
 [[tileset.layer]]
 name = "bgt_vw_waterdeel_vlak"
@@ -109,9 +109,13 @@ geometry_type = "MULTILINESTRING"
 srid = 28992
 buffer_size = 1
     [[tileset.layer.query]]
-    minzoom = 8
+    minzoom = 11
+    maxzoom = 12
+    sql = """SELECT geometrie,identificatie_lokaalid,type,relatievehoogteligging FROM bgt.bgt_vw_spoor_lijn WHERE geometrie && !bbox! AND minzoom = 11 AND maxzoom <= 13"""
+    [[tileset.layer.query]]
+    minzoom = 13
     maxzoom = 13
-    sql = """SELECT geometrie,identificatie_lokaalid,type,relatievehoogteligging FROM bgt.bgt_vw_spoor_lijn WHERE geometrie && !bbox! AND minzoom >= 8 AND maxzoom <= 13"""
+    sql = """SELECT geometrie,identificatie_lokaalid,type,relatievehoogteligging FROM bgt.bgt_vw_spoor_lijn WHERE geometrie && !bbox! AND minzoom >= 11 AND maxzoom <= 13"""
     [[tileset.layer.query]]
     minzoom = 14
     maxzoom = 15
@@ -164,14 +168,32 @@ buffer_size = 1
     [[tileset.layer.query]]
     minzoom = 8
     maxzoom = 13
-    sql = """SELECT geometrie,identificatie_lokaalid::TEXT,type,relatievehoogteligging FROM bgt.bgt_vw_wegdeel_lijn WHERE geometrie && !bbox! AND minzoom >= 8 AND maxzoom <= 13"""
+    sql = """SELECT geometrie,identificatie_lokaalid::TEXT,type,relatievehoogteligging FROM bgt.bgt_vw_wegdeel_lijn WHERE geometrie && !bbox! AND minzoom >= 8 AND maxzoom <= 13 OR type = 'autosnelweg'"""
     [[tileset.layer.query]]
     minzoom = 14
+    maxzoom = 14
+    sql = """SELECT geometrie,identificatie_lokaalid::TEXT,type,relatievehoogteligging FROM bgt.bgt_vw_wegdeel_lijn WHERE geometrie && !bbox! AND maxzoom = 15"""
+    [[tileset.layer.query]]
+    minzoom = 15
     maxzoom = 15
-    sql = """SELECT geometrie,identificatie_lokaalid::TEXT,type,relatievehoogteligging FROM bgt.bgt_vw_wegdeel_lijn WHERE geometrie && !bbox! AND minzoom >= 14 AND maxzoom <= 15"""
+    sql = """SELECT geometrie,identificatie_lokaalid::TEXT,type,relatievehoogteligging FROM bgt.bgt_vw_wegdeel_lijn WHERE geometrie && !bbox! AND maxzoom = 15"""
+
+# [[tileset.layer]]
+# name = "road_names"
+# table_name = "bgt.bgt_vw_wegdeel_lijn"
+# geometry_field = "geometrie"
+# geometry_type = "MULTILINESTRING"
+# minzoom = 14
+# maxzoom = 16
+# srid = 28992
+# buffer_size = 1
+#     [[tileset.layer.query]]
+#     minzoom = 14
+#     maxzoom = 16
+#     sql = """SELECT geometrie,identificatie_lokaalid::TEXT,type,wegnaam,wegnummer FROM bgt.bgt_vw_wegdeel_lijn WHERE geometrie && !bbox! AND minzoom = 14 AND maxzoom = 15"""
 
 [[tileset.layer]]
-name = "labels"
+name = "labels_punt"
 geometry_field = "geometrie"
 geometry_type = "POINT"
 srid = 28992
@@ -179,6 +201,29 @@ buffer_size = 20
     [[tileset.layer.query]]
     minzoom = 16
     sql = """SELECT geometrie,identificatie_lokaalid,type,tekst,hoek FROM bgt.bgt_vw_labels WHERE geometrie && !bbox!"""
+
+[[tileset.layer]]
+name = "labels_vlak"
+geometry_field = "geometrie"
+geometry_type = "POLYGON"
+srid = 28992
+buffer_size = 1
+    [[tileset.layer.query]]
+    minzoom = 12
+    maxzoom = 12
+    sql = """SELECT geometrie,identificatie_lokaalid,type FROM bgt.bgt_vw_labels_vlak WHERE geometrie && !bbox! AND minzoom = 12 AND maxzoom = 12"""
+    [[tileset.layer.query]]
+    minzoom = 13
+    maxzoom = 13
+    sql = """SELECT geometrie,identificatie_lokaalid,type FROM bgt.bgt_vw_labels_vlak WHERE geometrie && !bbox! AND minzoom = 13 AND maxzoom = 13"""    
+    [[tileset.layer.query]]
+    minzoom = 14
+    maxzoom = 15
+    sql = """SELECT geometrie,identificatie_lokaalid,type FROM bgt.bgt_vw_labels_vlak WHERE geometrie && !bbox! AND minzoom = 14 AND maxzoom = 15"""
+    [[tileset.layer.query]]
+    minzoom = 16
+    maxzoom = 16
+    sql = """SELECT geometrie,identificatie_lokaalid,type FROM bgt.bgt_vw_labels_vlak WHERE geometrie && !bbox! AND minzoom = 16 AND maxzoom = 16"""
 
 #   [[tileset.layer]]
 #   name = "bgt_vw_inrichtingselement_lijn"
