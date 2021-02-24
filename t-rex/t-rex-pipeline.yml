@@ -22,13 +22,14 @@ steps:
       arguments: --build-arg VERSION_TAG='$(VERSION_TAG)'
       Dockerfile: 't-rex/Dockerfile'
       tags: |
-        $(VERSION_TAG)-$(timeStamp)
+        $(VERSION_TAG)
         $(VERSION_TAG)-test
+        $(Build.BuildId)-$(timeStamp)
         latest
 
   - task: Docker@2
     inputs:
-      displayName: Docker Pusg (Test Image)
+      displayName: Docker Push (Test Image)
       containerRegistry: $(containerRegistry)
       repository: 't-rex'
       command: 'push'
@@ -36,23 +37,23 @@ steps:
         $(VERSION_TAG)-test
 
 
-  # - task: Docker@2
-  #   displayName: Test
-  #   inputs:
-  #     command: login
-  #     containerRegistry: $(containerRegistry)
-  # - script: |
-  #     # docker run my-registry.azurecr.io/somerepo/rnd-hello:latest
-  #     docker run $(containerRegistryFullName)/$(repository):test
+  - task: Docker@2
+    displayName: Test
+    inputs:
+      command: login
+      containerRegistry: $(containerRegistry)
+  - script: |
+      # docker run my-registry.azurecr.io/somerepo/rnd-hello:latest
+      docker run $(containerRegistryFullName)/$(repository):$(VERSION_TAG)-test
 
-  # - task: Docker@2
-  #   inputs:
-  #     containerRegistry: $(containerRegistry)
-  #     repository: 't-rex'
-  #     command: 'push'
-  #     tags: |
-  #       $(VERSION_TAG)
-  #       $(Build.BuildId)-$(Release.Deployment.StartTime)
-  #       latest
+  - task: Docker@2
+    inputs:
+      containerRegistry: $(containerRegistry)
+      repository: 't-rex'
+      command: 'push'
+      tags: |
+        $(VERSION_TAG)
+        $(Build.BuildId)-$(Release.Deployment.StartTime)
+        latest
 
 
