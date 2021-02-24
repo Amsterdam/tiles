@@ -3,25 +3,44 @@ pool:
 
 variables:
   VERSION_TAG: '0.12.0'
+  containerRegistry: 'Container Registry - piosupportacr'
+  containerRegistryFullName: 'piosupportacr.azurecr.io'
+  repository: 't-rex'
+
 
 steps:
   - task: Docker@2
     inputs:
-      containerRegistry: 'Container Registry - piosupportacr'
+      containerRegistry: $(containerRegistry)
       repository: 't-rex'
       command: 'build'
       arguments: --build-arg VERSION_TAG='$(VERSION_TAG)'
       Dockerfile: 't-rex/Dockerfile'
       tags: |
-        $(Build.BuildId)
+        $(VERSION_TAG)
+        $(Build.BuildId)-$(Date)
         latest
+
+
+  - task: Docker@2
+    displayName: Run Test
+    inputs:
+      command: login
+      containerRegistry: $(containerRegistry)
+  - script: |
+      # docker run my-registry.azurecr.io/somerepo/rnd-hello:latest
+      docker run $(containerRegistryFullName)/$(repository):$(Build.BuildId)
+
+
+
 
   - task: Docker@2
     inputs:
-      containerRegistry: 'Container Registry - piosupportacr'
+      containerRegistry: $(containerRegistry)
       repository: 't-rex'
       command: 'push'
       tags: |
+        $(VERSION_TAG)
         $(Build.BuildId)
         latest
 
