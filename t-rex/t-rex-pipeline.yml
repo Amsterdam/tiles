@@ -12,11 +12,11 @@ steps:
   # Create Timestamp pipeline variable
   - script: |
       echo "##vso[task.setvariable variable=timeStamp]$(date +%y%m%d%H%M%S)"
-    displayName: Create Timestamp
+    displayName: createTimestamp
 
   - task: Docker@2
+    displayName: dockerBuild
     inputs:
-      displayName: Docker Build
       containerRegistry: $(containerRegistry)
       repository: 't-rex'
       command: 'build'
@@ -29,8 +29,9 @@ steps:
         latest
 
   - task: Docker@2
+    displayName: dockerPushTestImage)
+
     inputs:
-      displayName: Docker Push (Test Image)
       containerRegistry: $(containerRegistry)
       repository: 't-rex'
       command: 'push'
@@ -38,11 +39,10 @@ steps:
         $(VERSION_TAG)-test
 
   - script: |
-      docker run $(containerRegistryFullName)/$(repository):$(VERSION_TAG)-test
-      echo Exit code $?
-      ls -l /jimbo
-      echo Exit code $?
-      exit 1
+      docker run -it $(containerRegistryFullName)/$(repository):$(VERSION_TAG)-test --version
+      exit $?
+
+
     displayName: Test
     failOnStderr: false
 
