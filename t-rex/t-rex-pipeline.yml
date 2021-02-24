@@ -18,8 +18,10 @@ steps:
       Dockerfile: 't-rex/Dockerfile'
       tags: |
         $(VERSION_TAG)
-        # $(Build.BuildId)-${{ Release.Deployment.StartTime }}
         latest
+
+
+# $(Build.BuildId)-${{ Release.Deployment.StartTime }}
 
   - task: Docker@2
     inputs:
