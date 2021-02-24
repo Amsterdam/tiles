@@ -28,7 +28,7 @@ steps:
         latest
 
   - task: Docker@2
-    displayName: dockerPushTestImage
+    displayName: dockerPush
     inputs:
       containerRegistry: $(containerRegistry)
       repository: 't-rex'
