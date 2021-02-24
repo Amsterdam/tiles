@@ -1,26 +1,28 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
-- master
-
 pool:
   vmImage: ubuntu-latest
+
+variables:
+  VERSION_TAG: '0.12.0'
 
 steps:
   - task: Docker@2
     inputs:
       containerRegistry: 'Container Registry - piosupportacr'
       repository: 't-rex'
-      command: 'buildAndPush'
+      command: 'build'
+      arguments: --build-arg VERSION_TAG='$(VERSION_TAG)'
       Dockerfile: 't-rex/Dockerfile'
-      ${{ if variables['isMaster'] }}:
+      tags: |
+        $(Build.BuildId)
+        latest
+
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'Container Registry - piosupportacr'
+      repository: 't-rex'
+      command: 'push'
         tags: |
           $(Build.BuildId)
           latest
-
-
 
 
