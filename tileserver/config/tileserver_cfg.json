@@ -1,9 +1,9 @@
 {
   "options": {
     "paths": {
-      "root": "../static",
-      "fonts": "fonts",
-      "styles": "styles"
+      "root": "",
+      "fonts": "",
+      "styles": "../static/styles"
     }
   },
   "styles": {

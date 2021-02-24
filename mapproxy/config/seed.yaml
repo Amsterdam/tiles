@@ -3,7 +3,7 @@ seeds:
 #### TOPO WM - KBK - DEFAULT STYLE
   wm_kbk:
     caches: [cache_wm_seed]
-    grids: [webmercator]
+    grids: [wm]
     coverages: ['kbk']
     levels:
       from: 11
@@ -11,11 +11,22 @@ seeds:
     refresh_before:
       # days: 7
       minutes: 15
+
+  wm_bgt:
+    caches: [cache_wm_seed]
+    grids: [wm]
+    coverages: ['bgt']
+    levels:
+      from: 17
+      to: 18
+    refresh_before:
+      # days: 7
+     minutes: 15
 
 #### TOPO WM - KBK - ZWART/WIT STYLE
   wm_kbk_zw:
     caches: [cache_wm_seed_zw]
-    grids: [webmercator]
+    grids: [wm]
     coverages: ['kbk']
     levels:
       from: 11
@@ -24,10 +35,21 @@ seeds:
       # days: 7
       minutes: 15
 
+  wm_bgt_zw:
+    caches: [cache_wm_seed_zw]
+    grids: [wm]
+    coverages: ['bgt']
+    levels:
+      from: 17
+      to: 18
+    refresh_before:
+      # days: 7
+     minutes: 15
+
 #### TOPO WM - KBK - LIGHT STYLE
   wm_kbk_light:
-    caches: [cache_wm_seed_zw]
-    grids: [webmercator]
+    caches: [cache_wm_seed_light]
+    grids: [wm]
     coverages: ['kbk']
     levels:
       from: 11
@@ -35,12 +57,23 @@ seeds:
     refresh_before:
       # days: 7
       minutes: 15
+
+  wm_bgt_light:
+    caches: [cache_wm_seed_light]
+    grids: [wm]
+    coverages: ['bgt']
+    levels:
+      from: 17
+      to: 18
+    refresh_before:
+      # days: 7
+     minutes: 15
 
 ############  RD - SEEDS        ############
 #### TOPO RD - KBK - DEFAULT STYLE
   rd_kbk:
     caches: [cache_rd_seed]
-    grids: [nl_grid]
+    grids: [rd]
     coverages: ['kbk']
     levels:
       from: 5
@@ -48,11 +81,22 @@ seeds:
     refresh_before:
       # days: 7
       minutes: 15
+
+  rd_bgt:
+    caches: [cache_rd_seed]
+    grids: [rd]
+    coverages: ['bgt']
+    levels:
+      from: 12
+      to: 13
+    refresh_before:
+      # days: 7
+     minutes: 15
 
 #### TOPO RD - KBK - ZWART/WIT STYLE
   rd_kbk_zw:
     caches: [cache_rd_seed_zw]
-    grids: [nl_grid]
+    grids: [rd]
     coverages: ['kbk']
     levels:
       from: 5
@@ -61,10 +105,21 @@ seeds:
       # days: 7
       minutes: 15
 
+  rd_bgt_zw:
+    caches: [cache_rd_seed_zw]
+    grids: [rd]
+    coverages: ['bgt']
+    levels:
+      from: 12
+      to: 13
+    refresh_before:
+      # days: 7
+     minutes: 15
+
 #### TOPO RD - KBK - LIGHT STYLE
   rd_kbk_light:
     caches: [cache_rd_seed_light]
-    grids: [nl_grid]
+    grids: [rd]
     coverages: ['kbk']
     levels:
       from: 5
@@ -72,6 +127,17 @@ seeds:
     refresh_before:
       # days: 7
       minutes: 15
+
+  rd_bgt_light:
+    caches: [cache_rd_seed_light]
+    grids: [rd]
+    coverages: ['bgt']
+    levels:
+      from: 12
+      to: 13
+    refresh_before:
+      # days: 7
+     minutes: 15
 
 
 coverages:

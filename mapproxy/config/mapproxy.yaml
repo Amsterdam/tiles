@@ -27,33 +27,33 @@ services:
 
 layers:
 #### WM (Webmercator) Layers ####
-  - name: wm
+  - name: topo_wm
     title: Basiskaart Amsterdam (Web Mercator) - WM Default
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_wm_live]
-  - name: wm_zw
+  - name: topo_wm_zw
     title: Basiskaart Amsterdam (Web Mercator) - WM Zwart/Wit
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_wm_live_zw]
-  - name: wm_light
+  - name: topo_wm_light
     title: Basiskaart Amsterdam (Web Mercator) - WM Light
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_wm_live_light]
 #### RD (Rijksdriehoek) Layers ####
-  - name: rd
+  - name: topo_rd
     title: Basiskaart Amsterdam (Web Mercator) - RD Default
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_rd_live]
-  - name: rd_zw
+  - name: topo_rd_zw
     title: Basiskaart Amsterdam (Web Mercator) - RD Zwart/Wit
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
     sources: [cache_rd_live_zw]
-  - name: rd_light
+  - name: topo_rd_light
     title: Basiskaart Amsterdam (Web Mercator) - RD Light
     md:
       abstract: Basiskaart Amsterdam in Web Mercator projectie
@@ -65,13 +65,13 @@ caches:
 
 #### WM - KBK & BGT Live Cache
   cache_wm_live:
-    grids: [webmercator]
+    grids: [wm]
     sources: [wm_server, wm_tiles]
     disable_storage: true
 
 #### WM - KBK & BGT Seed Cache
   cache_wm_seed:
-    grids: [webmercator]
+    grids: [wm]
     sources: [wm_server_all]
     cache_dir: /mnt/tiles
     cache:
@@ -82,13 +82,13 @@ caches:
 
 #### WM - KBK & BGT Live Cache
   cache_wm_live_zw:
-    grids: [webmercator]
+    grids: [wm]
     sources: [wm_server_zw, wm_tiles_zw]
     disable_storage: true
 
 #### WM - KBK & BGT Seed Cache
   cache_wm_seed_zw:
-    grids: [webmercator]
+    grids: [wm]
     sources: [wm_server_all_zw]
     cache_dir: /mnt/tiles
     cache:
@@ -99,13 +99,13 @@ caches:
 
 #### WM - KBK & BGT Live Cache
   cache_wm_live_light:
-    grids: [webmercator]
+    grids: [wm]
     sources: [wm_server_light, wm_tiles_light]
     disable_storage: true
 
 #### WM - KBK & BGT Seed Cache
   cache_wm_seed_light:
-    grids: [webmercator]
+    grids: [wm]
     sources: [wm_server_all_light]
     cache_dir: /mnt/tiles
     cache:
@@ -117,13 +117,13 @@ caches:
 
 #### RD - KBK & BGT Live Cache
   cache_rd_live:
-    grids: [nl_grid]
+    grids: [rd]
     sources: [rd_server, rd_tiles]
     disable_storage: true
 
 #### RD - KBK & BGT Seed Cache
   cache_rd_seed:
-    grids: [nl_grid]
+    grids: [rd]
     sources: [rd_server_all]
     cache_dir: /mnt/tiles
     cache:
@@ -134,13 +134,13 @@ caches:
 
 #### RD - KBK & BGT Live Cache
   cache_rd_live_zw:
-    grids: [nl_grid]
+    grids: [rd]
     sources: [rd_server_zw, rd_tiles_zw]
     disable_storage: true
 
 #### RD - KBK & BGT Seed Cache
   cache_rd_seed_zw:
-    grids: [nl_grid]
+    grids: [rd]
     sources: [rd_server_all_zw]
     cache_dir: /mnt/tiles
     cache:
@@ -151,13 +151,13 @@ caches:
 
 #### RD - KBK & BGT Live Cache
   cache_rd_live_light:
-    grids: [nl_grid]
+    grids: [rd]
     sources: [rd_server_light, rd_tiles_light]
     disable_storage: true
 
 #### RD - KBK & BGT Seed Cache
   cache_rd_seed_light:
-    grids: [nl_grid]
+    grids: [rd]
     sources: [rd_server_all_light]
     cache_dir: /mnt/tiles
     cache:
@@ -172,20 +172,20 @@ sources:
 #### WM - BGT Tileserver source for Live
   wm_server:
     type: tile
-    grid: webmercator
+    grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm/%(z)s/%(x)s/%(y)s.png
     min_res: 1.6
 #### WM - KBK Seeded/Cached source for Live
   wm_tiles:
     type: tile
-    grid: webmercator
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/%(z)s/%(x)s/%(y)s.png
+    grid: wm
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/default/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
   wm_server_all:
     type: tile
-    grid: webmercator
+    grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm/%(z)s/%(x)s/%(y)s.png
     seed_only: true
 
@@ -194,20 +194,20 @@ sources:
 #### WM - BGT Tileserver source for Live
   wm_server_zw:
     type: tile
-    grid: webmercator
+    grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm_zw/%(z)s/%(x)s/%(y)s.png
     min_res: 1.6
 #### WM - KBK Seeded/Cached source for Live
   wm_tiles_zw:
     type: tile
-    grid: webmercator
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm_zw/%(z)s/%(x)s/%(y)s.png
+    grid: wm
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/zw/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
   wm_server_all_zw:
     type: tile
-    grid: webmercator
+    grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm_zw/%(z)s/%(x)s/%(y)s.png
     seed_only: true
 
@@ -216,20 +216,20 @@ sources:
 #### WM - BGT Tileserver source for Live
   wm_server_light:
     type: tile
-    grid: webmercator
+    grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm_light/%(z)s/%(x)s/%(y)s.png
     min_res: 1.6
 #### WM - KBK Seeded/Cached source for Live
   wm_tiles_light:
     type: tile
-    grid: webmercator
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm_light/%(z)s/%(x)s/%(y)s.png
+    grid: wm
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/light/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
   wm_server_all_light:
     type: tile
-    grid: webmercator
+    grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm_light/%(z)s/%(x)s/%(y)s.png
     seed_only: true
 
@@ -239,20 +239,20 @@ sources:
 #### RD - BGT Tileserver source for Live
   rd_server:
     type: tile
-    grid: nl_grid
+    grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd/%(z)s/%(x)s/%(y)s.png
     min_res: 1.6
 #### RD - KBK Seeded/Cached source for Live
   rd_tiles:
     type: tile
-    grid: nl_grid
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/%(z)s/%(x)s/%(y)s.png
+    grid: rd
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/default/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
   rd_server_all:
     type: tile
-    grid: nl_grid
+    grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd/%(z)s/%(x)s/%(y)s.png
     seed_only: true
 
@@ -261,20 +261,20 @@ sources:
 #### RD - BGT Tileserver source for Live
   rd_server_zw:
     type: tile
-    grid: nl_grid
+    grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd_zw/%(z)s/%(x)s/%(y)s.png
     min_res: 1.6
 #### RD - KBK Seeded/Cached source for Live
   rd_tiles_zw:
     type: tile
-    grid: nl_grid
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd_zw/%(z)s/%(x)s/%(y)s.png
+    grid: rd
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/zw/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
   rd_server_all_zw:
     type: tile
-    grid: nl_grid
+    grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd_zw/%(z)s/%(x)s/%(y)s.png
     seed_only: true
 
@@ -283,36 +283,36 @@ sources:
 #### RD - BGT Tileserver source for Live
   rd_server_light:
     type: tile
-    grid: nl_grid
+    grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd_light/%(z)s/%(x)s/%(y)s.png
     min_res: 1.6
 #### RD - KBK Seeded/Cached source for Live
   rd_tiles_light:
     type: tile
-    grid: nl_grid
-    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd_light/%(z)s/%(x)s/%(y)s.png
+    grid: rd
+    url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/light/%(z)s/%(x)s/%(y)s.png
     max_res: 1.6
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
   rd_server_all_light:
     type: tile
-    grid: nl_grid
+    grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd_light/%(z)s/%(x)s/%(y)s.png
     seed_only: true
 
 #### GRIDS ####
 grids:
 #### RD GRID ####
-  nl_grid:
+  rd:
     srs: EPSG:28992
     tile_size: [256,256]
-    origin: sw
+    origin: nw
     res: [3440.64,1720.32,860.16,430.08,215.04,107.52,53.76,26.88,13.44,6.72,3.36,1.68,0.84,0.42,0.21,0.105,0.0525]
     #     0       1       2      3      4      5      6     7     8     9    10   11   12   13   14   15    16
     bbox: [-285401.920,22598.080,595401.9199999999,903401.9199999999]
 
 #### WM GRID ####
-  webmercator:
+  wm:
     base: GLOBAL_WEBMERCATOR
     num_levels: 22
 
