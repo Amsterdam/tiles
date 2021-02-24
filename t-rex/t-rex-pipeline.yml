@@ -18,21 +18,8 @@ steps:
       Dockerfile: 't-rex/Dockerfile'
       tags: |
         $(VERSION_TAG)
-        $(Build.BuildId)-$(Date)
+        $(Build.BuildId)-$(Release.Deployment.StartTime)
         latest
-
-
-  - task: Docker@2
-    displayName: Run Test
-    inputs:
-      command: login
-      containerRegistry: $(containerRegistry)
-  - script: |
-      # docker run my-registry.azurecr.io/somerepo/rnd-hello:latest
-      docker run $(containerRegistryFullName)/$(repository):$(Build.BuildId)
-
-
-
 
   - task: Docker@2
     inputs:
@@ -40,8 +27,25 @@ steps:
       repository: 't-rex'
       command: 'push'
       tags: |
-        $(VERSION_TAG)
-        $(Build.BuildId)
-        latest
+        test
+
+  # - task: Docker@2
+  #   displayName: Test
+  #   inputs:
+  #     command: login
+  #     containerRegistry: $(containerRegistry)
+  # - script: |
+  #     # docker run my-registry.azurecr.io/somerepo/rnd-hello:latest
+  #     docker run $(containerRegistryFullName)/$(repository):test
+
+  # - task: Docker@2
+  #   inputs:
+  #     containerRegistry: $(containerRegistry)
+  #     repository: 't-rex'
+  #     command: 'push'
+  #     tags: |
+  #       $(VERSION_TAG)
+  #       $(Build.BuildId)-$(Release.Deployment.StartTime)
+  #       latest
 
 
