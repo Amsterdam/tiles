@@ -9,17 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-
-- task: Docker@2
-  inputs:
-    containerRegistry: 'Container Registry - piosupportacr'
-    repository: '$(repoName)'
-    command: 'buildAndPush'
-    Dockerfile: 't-rex/Dockerfile'
-    ${{ if variables['isMaster'] }}:
-      tags: |
-        $(Build.BuildId)
-        latest
+steps:
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'Container Registry - piosupportacr'
+      repository: '$(repoName)'
+      command: 'buildAndPush'
+      Dockerfile: 't-rex/Dockerfile'
+      ${{ if variables['isMaster'] }}:
+        tags: |
+          $(Build.BuildId)
+          latest
 
 
 
