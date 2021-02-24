@@ -39,7 +39,7 @@ steps:
         $(VERSION_TAG)-test
 
   - script: |
-      docker run -it $(containerRegistryFullName)/$(repository):$(VERSION_TAG)-test --version
+      docker run $(containerRegistryFullName)/$(repository):$(VERSION_TAG)-test --version
       exit $?
 
 
