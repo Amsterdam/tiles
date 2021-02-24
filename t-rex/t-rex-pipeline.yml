@@ -21,8 +21,8 @@ steps:
       containerRegistry: 'Container Registry - piosupportacr'
       repository: 't-rex'
       command: 'push'
-        tags: |
-          $(Build.BuildId)
-          latest
+      tags: |
+        $(Build.BuildId)
+        latest
 
 
