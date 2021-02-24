@@ -45,15 +45,18 @@ steps:
   - script: |
       # docker run my-registry.azurecr.io/somerepo/rnd-hello:latest
       docker run $(containerRegistryFullName)/$(repository):$(VERSION_TAG)-test
+      echo Exit code $?
+      ls -l /jimbo
+      echo Exit code $?
 
-  - task: Docker@2
-    inputs:
-      containerRegistry: $(containerRegistry)
-      repository: 't-rex'
-      command: 'push'
-      tags: |
-        $(VERSION_TAG)
-        $(Build.BuildId)-$(Release.Deployment.StartTime)
-        latest
+  # - task: Docker@2
+  #   inputs:
+  #     containerRegistry: $(containerRegistry)
+  #     repository: 't-rex'
+  #     command: 'push'
+  #     tags: |
+  #       $(VERSION_TAG)
+  #       $(Build.BuildId)-$(Release.Deployment.StartTime)
+  #       latest
 
 
