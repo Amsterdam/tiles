@@ -24,38 +24,17 @@ steps:
       Dockerfile: 't-rex/Dockerfile'
       tags: |
         $(VERSION_TAG)
-        $(VERSION_TAG)-test
-        $(Build.BuildId)-$(timeStamp)
+        $(VERSION_TAG)-$(Build.BuildId)-$(timeStamp)
         latest
 
   - task: Docker@2
     displayName: dockerPushTestImage
-
     inputs:
       containerRegistry: $(containerRegistry)
       repository: 't-rex'
       command: 'push'
       tags: |
-        $(VERSION_TAG)-test
-
-  - script: |
-      docker run $(containerRegistryFullName)/$(repository):$(VERSION_TAG)-test --jimbo
-      exit $?
-
-
-    displayName: Test
-    failOnStderr: false
-
-
-
-  # - task: Docker@2
-  #   inputs:
-  #     containerRegistry: $(containerRegistry)
-  #     repository: 't-rex'
-  #     command: 'push'
-  #     tags: |
-  #       $(VERSION_TAG)
-  #       $(Build.BuildId)-$(Release.Deployment.StartTime)
-  #       latest
-
+        $(VERSION_TAG)
+        $(VERSION_TAG)-$(Build.BuildId)-$(timeStamp)
+        latest
 
