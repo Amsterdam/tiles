@@ -42,6 +42,7 @@ steps:
       echo Exit code $?
       ls -l /jimbo
       echo Exit code $?
+      exit 1
     displayName: Test
     failOnStderr: false
 
