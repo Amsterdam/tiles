@@ -25,6 +25,16 @@ services:
     # origin for /tiles service
     origin: 'nw'
 
+parts:
+  coverages:
+    kbk: &kbk
+      bbox: [94100,464250,170000,514160]
+      srs: 'EPSG:28992'
+    bgt: &bgt
+      bbox: [104000,474000,136000,502100]
+      srs: 'EPSG:28992'
+
+
 layers:
 #### WM (Webmercator) Layers ####
   - name: topo_wm
@@ -175,12 +185,15 @@ sources:
     grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm/%(z)s/%(x)s/%(y)s.png
     min_res: 0.42
+    coverage: *bgt
+
 #### WM - KBK Seeded/Cached source for Live
   wm_tiles:
     type: tile
     grid: wm
     url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/default/%(z)s/%(x)s/%(y)s.png
     max_res: 0.42
+    coverage: *kbk
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
   wm_server_all:
