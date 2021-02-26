@@ -34,7 +34,6 @@ parts:
       bbox: [104000,474000,136000,502100]
       srs: 'EPSG:28992'
 
-
 layers:
 #### WM (Webmercator) Layers ####
   - name: topo_wm
@@ -186,7 +185,6 @@ sources:
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm/%(z)s/%(x)s/%(y)s.png
     min_res: 0.42
     coverage: *bgt
-
 #### WM - KBK Seeded/Cached source for Live
   wm_tiles:
     type: tile
@@ -210,12 +208,14 @@ sources:
     grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm_zw/%(z)s/%(x)s/%(y)s.png
     min_res: 0.42
+    coverage: *bgt
 #### WM - KBK Seeded/Cached source for Live
   wm_tiles_zw:
     type: tile
     grid: wm
     url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/zw/%(z)s/%(x)s/%(y)s.png
     max_res: 0.42
+    coverage: *kbk
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
   wm_server_all_zw:
@@ -232,12 +232,14 @@ sources:
     grid: wm
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_wm_light/%(z)s/%(x)s/%(y)s.png
     min_res: 0.42
+    coverage: *bgt
 #### WM - KBK Seeded/Cached source for Live
   wm_tiles_light:
     type: tile
     grid: wm
     url: https://REPLACE_BLOB_URL_REPLACE/tiles/wm/light/%(z)s/%(x)s/%(y)s.png
     max_res: 0.42
+    coverage: *kbk
 
 #### WM - KBK Seed/Cache source for creating Seed/Cache
   wm_server_all_light:
@@ -255,12 +257,14 @@ sources:
     grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd/%(z)s/%(x)s/%(y)s.png
     min_res: 0.42
+    coverage: *bgt
 #### RD - KBK Seeded/Cached source for Live
   rd_tiles:
     type: tile
     grid: rd
     url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/default/%(z)s/%(x)s/%(y)s.png
     max_res: 0.42
+    coverage: *kbk
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
   rd_server_all:
@@ -277,12 +281,14 @@ sources:
     grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd_zw/%(z)s/%(x)s/%(y)s.png
     min_res: 0.42
+    coverage: *bgt
 #### RD - KBK Seeded/Cached source for Live
   rd_tiles_zw:
     type: tile
     grid: rd
     url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/zw/%(z)s/%(x)s/%(y)s.png
     max_res: 0.42
+    coverage: *kbk
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
   rd_server_all_zw:
@@ -299,12 +305,14 @@ sources:
     grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd_light/%(z)s/%(x)s/%(y)s.png
     min_res: 0.42
+    coverage: *bgt
 #### RD - KBK Seeded/Cached source for Live
   rd_tiles_light:
     type: tile
     grid: rd
     url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/light/%(z)s/%(x)s/%(y)s.png
     max_res: 0.42
+    coverage: *kbk
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
   rd_server_all_light:
