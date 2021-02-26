@@ -257,14 +257,12 @@ sources:
     grid: rd
     url: http://REPLACE_SERVICE_URL_REPLACE/styles/topo_rd/%(z)s/%(x)s/%(y)s.png
     min_res: 0.42
-    coverage: *bgt
 #### RD - KBK Seeded/Cached source for Live
   rd_tiles:
     type: tile
     grid: rd
     url: https://REPLACE_BLOB_URL_REPLACE/tiles/rd/default/%(z)s/%(x)s/%(y)s.png
     max_res: 0.42
-    coverage: *kbk
 
 #### RD - KBK Seed/Cache source for creating Seed/Cache
   rd_server_all:
