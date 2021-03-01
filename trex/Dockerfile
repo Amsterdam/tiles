@@ -1,4 +1,4 @@
-FROM sourcepole/t-rex:0.12.0
+FROM sourcepole/t-rex:0.13.0
 LABEL maintainer="datapunt@amsterdam.nl"
 
 USER root
@@ -15,14 +15,3 @@ VOLUME ["/var/data/out"]
 EXPOSE 6767
 
 ENTRYPOINT ["/usr/bin/t_rex"]
-
-
-
-
-
-
-
-
-
-
-

@@ -11,36 +11,57 @@ services:
       POSTGRES_USER: basiskaart
       POSTGRES_PASSWORD: insecure
 
-  trex:
+  t_rex:
     image: sourcepole/t-rex
     ports:
       - "6767:6767"
-    # links:
-    #   - database
+    links:
+      - database
     environment:
       DATABASE_NAME: basiskaart
       DATABASE_HOST: database
       DATABASE_USER: basiskaart
       DATABASE_PASSWORD: insecure
     volumes:
-      - "$PWD/trex/data/in:/var/data/in:ro"
-      - "$PWD/trex/data/out:/var/data/out"
-      - "$PWD/trex/config:/var/config:ro"
-      - "$PWD/trex/cache:/var/cache/mvtcache/wm"
-      - "$PWD/tileserver/static:/static"
-    # command: serve --config /var/config/topo_wm.toml
-    # command: generate --maxzoom 16 --config  /var/config/topo_wm.toml
-    # command: generate --maxzoom 11 --config  /var/config/topo_rd.toml
-    command: generate --minzoom=10 --maxzoom=10 --extent 4.64033750451671,52.2516789054116,5.10736113164264,52.5062589665124 --config /var/config/topo_rd.toml --loglevel info
+      - "$PWD/local/data/in:/var/data/in:ro"
+      - "$PWD/local/data/out:/var/data/out"
+      - "$PWD/local:/var/config:ro"
+      - "$PWD/local/cache:/var/cache/mvtcache/wm"
+      - "$PWD/local/static:/static"
+    command: serve --config /var/config/topo_wm.toml
+    # command: generate --minzoom=10 --maxzoom=10 --extent 4.64033750451671,52.2516789054116,5.10736113164264,52.5062589665124 --config /var/config/topo_rd.toml --loglevel info
+
+  t_rex_rd:
+    image: sourcepole/t-rex
+    ports:
+      - "6768:6767"
+    links:
+      - database
+    environment:
+      DATABASE_NAME: basiskaart
+      DATABASE_HOST: database
+      DATABASE_USER: basiskaart
+      DATABASE_PASSWORD: insecure
+    volumes:
+      - "$PWD/local/data/in:/var/data/in:ro"
+      - "$PWD/local/data/out:/var/data/out"
+      - "$PWD/local:/var/config:ro"
+      - "$PWD/local/cache:/var/cache/mvtcache"
+      - "$PWD/local/static:/static"
+    command: serve --config  /var/config/topo_rd.toml
 
   tileserver:
     image: maptiler/tileserver-gl
     ports:
       - "8080:8080"
+    links:
+      - t_rex
+      - t_rex_rd
     volumes:
-      - "$PWD/data:/data"
-      - "$PWD/tileserver/config:/var/config:ro"
-      - "$PWD/tileserver/static:/var/static:ro"
+      - "$PWD/local/data:/data"
+      - "$PWD/local:/var/config:ro"
+      - "$PWD/local/styles_direct:/static/styles_direct:ro"
+      - "$PWD/tileserver/static/fonts:/static/fonts:ro"
     command: -p 8080 --verbose -c /var/config/tileserver_cfg.json
 
   mapproxy:
@@ -51,7 +72,7 @@ services:
     links: 
       - tileserver
     volumes:
-      - "$PWD/mapproxy/config:/var/config:ro"
+      - "$PWD/local:/var/config:ro"
     environment:
       UWSGI_HTTP: "0.0.0.0:8000"
       UWSGI_MASTER: 1
@@ -64,7 +85,7 @@ services:
     links:
       - tileserver
     volumes:
-      - "$PWD/mapproxy/config:/var/config:ro"
-      - "$PWD/tiles:/mnt/tiles"
+      - "$PWD/local:/var/config:ro"
+      - "$PWD/local/tiles:/mnt/tiles"
     command: >
-      mapproxy-seed -c 4 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=wm_kbk
+      mapproxy-seed -c 1 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=wm_kbk

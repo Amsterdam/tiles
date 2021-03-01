@@ -1,0 +1,25 @@
+{
+  "attribution":"<a href=\"https://kadaster.nl\">Kadaster</a>",
+  "bounds":[
+    -22.500004,
+    0,
+    0,
+    21.943049
+  ],
+  "center":[
+    -13.359377,
+    10.141932,
+    7
+  ],
+  "description":"Topografie Amsterdam (RD)",
+  "format": "pbf",
+  "maxzoom":11,
+  "minzoom":5,
+  "name":"topo_rd",
+  "scheme":"xyz",
+  "tilejson": "2.2.0",
+  "tiles": [
+    "http://t_rex_rd:6768/basiskaart_rd/{z}/{x}/{y}.pbf"
+  ],
+  "version":"1.0.0"
+}

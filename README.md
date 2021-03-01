@@ -1,102 +1,98 @@
-# Create vector tiles for basiskaart with T-REX
+# Create vector and raster tiles for basiskaart
 
-T-REX vector tile creation
+## Prepare the database
 
-`https://t-rex.tileserver.ch/`
-
-- For now we start by importing the latest version of the basiskaart db
+Import the latest version of the basiskaart db into PostGIS:
 
 `docker-compose up -d database`  
 `docker-compose exec database update-db.sh basiskaart`
 
-- Create the mviews which contains the BGT en KBK10 and KBK50 data, run from the repro root dir
+Create the mviews which contains the BGT en KBK10 and KBK50 data, run from the repro root dir
 
 ``docker exec -it vector_tiles_t_rex_database_1 bash `psql -h localhost -p5402 -U basiskaart -d basiskaart -f ./config/database/create_all_mviews.sql` | echo please wait...``
 
-- To generate a new version for config.toml do:
+## Serve vector tiles
 
-`docker-compose run trex genconfig --dbconn postgresql://basiskaart:insecure@database/basiskaart > config/config.toml.template`
+[T-Rex](https://t-rex.tileserver.ch/)
 
-Before runnning the tileserver, make sure it can actually cache the files to disk
+Make sure T-Rex can actually cache the files to disk:
 
 `mkdir -p cache`
 
-`sudo chown -Rf www-data:www-data cache`
+`sudo chown -Rf www-data:wwww-data cache`
 
-- Run T-Rex tileserver:
+Bring up T-Rex to serve vector tiles in Web Mercator (EPSG:3857) projection:
 
-`docker-compose run -p 6767:6767 trex serve --config  /var/config/config.toml`
+`docker-compose up -d t_rex`
 
-or to use the new mview
+View the vector tiles in Web Mercator (EPSG:3857) projection:
+ 
+- [Viewer (WM)](http://localhost:6767/static/mapbox.html)
+ 
+Bring up T-Rex to serve vector tiles in Rijksdriehoekstelsel (EPSG:28992) projection:
 
-`docker-compose run -p 6767:6767 trex serve --config  /var/config/topo_wm.toml`
+`docker-compose up -d t_rex_rd`
 
-- Then go to :
+View the vector tiles in Rijksdriehoekstelsel (EPSG:28992) projection:
+ 
+- [Viewer (RD)](http://localhost:6767/static/mapbox-rd.html)
 
- `http://localhost:6767/`
+## Generate vector tile caches
 
- or
-  
- `http://localhost:6767/static/leaflet.html`
+To generate vector tiles cache, run cmd:
 
- or
+`docker-compose run t_rex generate --minzoom 10 --maxzoom 16 --config /var/config/topo_wm.toml --extent 4.49712476945351,52.1630507756721,5.60867873764429,52.6147675426215`
 
- `http://localhost:6767/static/leaflet_topo_wm.html`
+To generate vector tiles cache, run cmd:
 
-- to generate vector tiles cache, run cmd:
+`docker-compose run t_rex_rd generate --minzoom 5 --maxzoom 11 --config /var/config/topo_rd.toml --extend 4.49712476945351,52.1630507756721,5.60867873764429,52.6147675426215`
 
-`docker-compose run trex generate --maxzoom 16 --config  /var/config/topo_wm.toml`
-  
-- Create mbtiles file  (optional)
+## Serve raster tiles
 
-MB tiles is not really required. It is possible refer directly from Tileserver GL to T-rex.
-But for completeness we include this here. First install mb-util from :
+[TileServer GL](https://tileserver.readthedocs.io/)
 
-`https://github.com/mapbox/mbutil`
+Bring up TileServer GL to serve raster tiles:
 
-`mb-util --image_format=pbf cache/bgt_vw data/bgt_vw.mbtiles`
+`docker-compose up -d tileserver_gl`
 
-T-Rex writes the bounds and center in metdata.json with square brackets  around the array.
-But Tilserver-GL expects these arrays without square brackets. So we have to opdate the metadata.
-This can be done in the mbtiles file with:
-
-`echo "update metadata set value=trim(trim(value,'['), ']') where name in (\"bounds\", \"center\")" | sqlite3 data/bgt_vw.mbtiles`
-
-- Run Tileserver GL
-
-`docker-compose up -d tileserver`
-
-Then we can see results on:
+Check the TileServer GL configuration and endpoints:
 
 `http://localhost:8080/`
 
-Raster tiles can be seen on:
+View the raster tiles in Web Mercator (EPSG:3857) projection:
 
-`http://localhost:8080/styles/basic/?raster#14/52.3757/4.9061`
+- [Standaard](http://localhost:8080/styles/topo_wm/?raster#12/52.37875/4.87371)
+- [Light](http://localhost:8080/styles/topo_wm_light/?raster#12/52.37875/4.87371)
+- [Z/W](http://localhost:8080/styles/topo_wm_zw/?raster#12/52.37875/4.87371)
 
-In order to see the vector tiles we need to add t_rex to point to 127.0.0.1  in /etc/hosts
+View the raster tiles in Rijksdriehoekstelsel (EPSG:28992) projection:
 
-cat /etc/hosts
+- [Standaard](http://localhost:8080/styles/topo_rd/?raster#6/10.97152/-11.25000)
+- [Light](http://localhost:8080/styles/topo_rd_light/?raster#6/10.97152/-11.25000)
+- [Z/W](http://localhost:8080/styles/topo_rd_zw/?raster#6/10.97152/-11.25000)
 
-```\#
-\# Host Database
-\#
-127.0.0.1   localhost MacBook-Pro-FromMe.local t_rex
-...
+To see the vector tiles we need to add `t_rex` and `t_rex_rd` to point to 127.0.0.1  in `/etc/hosts`
+
+```
+sudo cat >>/etc/hosts <<EOL
+#
+# Map t-rex endpoints to localhost
+#
+127.0.0.1	t_rex
+127.0.0.1	t_rex_rd
+EOL
 ```
 
-But then Tileserver GL serves the T-Rex vector tiles directly in:
+## Generate raster tiles
 
-`http://localhost:8080/styles/basic/?vector#12/52.37875/4.87371`
+[MapProxy](https://mapproxy.org/)
 
-- Generate png tiles with mapproxy
+Build topo_wm mapproxy image:
 
-Build mapproxy seed image:
+`docker-compose build topo_wm`
 
-`docker-compose build mapproxy_wm_seed`
+Then run the mapproxy seeding :
 
-Then run the maproxy seeding:
-
-`docker-compose run mapproxy_wm_seed`
+`docker-compose run topo_wm`
 
 The resulting tiles are in the ./tiles subdirectory

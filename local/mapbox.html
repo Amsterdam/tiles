@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Viewer (WM)</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+      body {
+          margin: 0;
+          padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width:100%;
+      }
+      #menu {
+        position: absolute;
+        background: #fff;
+        padding: 10px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="menu">
+      <input id="topo_wm" type="radio" name="rtoggle" value="std" checked="checked" />
+      <label for="topo_wm">Standaard</label>
+      <input id="topo_wm_light" type="radio" name="rtoggle" value="light" />
+      <label for="topo_wm_light">Light</label>
+      <input id="topo_wm_zw" type="radio" name="rtoggle" value="zw" />
+      <label for="topo_wm_zw">Z/W</label>
+    </div>
+    <script>
+      var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'http://localhost:6767/static/styles/topo_wm.json',
+          center: [4.891438, 52.373012],
+          zoom: 12,
+          hash: true,
+          attributionControl: false,
+      });
+
+      map.addControl(
+        new mapboxgl.NavigationControl(),
+        'top-right'
+      );
+
+      map.addControl(
+        new mapboxgl.AttributionControl({
+          compact: true
+        })
+      );
+
+      var layerList = document.getElementById('menu');
+      var inputs = layerList.getElementsByTagName('input');
+ 
+      function switchLayer(layer) {
+        var layerId = layer.target.id;
+        map.setStyle('http://localhost:6767/static/styles/' + layerId + '.json');
+      }
+ 
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].onclick = switchLayer;
+      }
+
+    </script>
+  </body>
+</html>

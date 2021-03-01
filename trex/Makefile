@@ -1,7 +1,7 @@
-VERSION_TAG = 0.12.0
+VERSION_TAG = 0.13.0
 
 build:
-	docker build --build-arg VERSION_TAG=$(VERSION_TAG) -t jim -f Dockerfile .
+	docker build --build-arg VERSION_TAG=$(VERSION_TAG) -t test -f Dockerfile .
 	docker run sourcepole/t-rex --version
 
 push:
