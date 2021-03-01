@@ -54,9 +54,9 @@ services:
     image: maptiler/tileserver-gl
     ports:
       - "8080:8080"
-    # links:
-    #   - t_rex
-    #   - t_rex_rd
+    links:
+      - t_rex
+      - t_rex_rd
     volumes:
       - "$PWD/local/data:/data"
       - "$PWD/local:/var/config:ro"
