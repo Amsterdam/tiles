@@ -134,7 +134,7 @@ caches:
   cache_rd_seed:
     grids: [rd]
     sources: [rd_server_all]
-    cache_dir: /mnt/tiles
+    cache_dir: /tmp/tiles
     cache:
       type: file
       directory_layout: tms

@@ -54,9 +54,9 @@ services:
     image: maptiler/tileserver-gl
     ports:
       - "8080:8080"
-    links:
-      - t_rex
-      - t_rex_rd
+    # links:
+    #   - t_rex
+    #   - t_rex_rd
     volumes:
       - "$PWD/local/data:/data"
       - "$PWD/local:/var/config:ro"
@@ -88,4 +88,4 @@ services:
       - "$PWD/local:/var/config:ro"
       - "$PWD/local/tiles:/mnt/tiles"
     command: >
-      mapproxy-seed -c 1 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=wm_kbk
+      mapproxy-seed -c 4 -s /var/config/seed.yaml -f /var/config/mapproxy.yaml --seed=rd_kbk,rd_bgt

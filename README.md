@@ -26,15 +26,15 @@ Bring up T-Rex to serve vector tiles in Web Mercator (EPSG:3857) projection:
 `docker-compose up -d t_rex`
 
 View the vector tiles in Web Mercator (EPSG:3857) projection:
- 
+
 - [Viewer (WM)](http://localhost:6767/static/mapbox.html)
- 
+
 Bring up T-Rex to serve vector tiles in Rijksdriehoekstelsel (EPSG:28992) projection:
 
 `docker-compose up -d t_rex_rd`
 
 View the vector tiles in Rijksdriehoekstelsel (EPSG:28992) projection:
- 
+
 - [Viewer (RD)](http://localhost:6767/static/mapbox-rd.html)
 
 ## Generate vector tile caches
@@ -73,13 +73,13 @@ View the raster tiles in Rijksdriehoekstelsel (EPSG:28992) projection:
 
 To see the vector tiles we need to add `t_rex` and `t_rex_rd` to point to 127.0.0.1  in `/etc/hosts`
 
-```
+```bash
 sudo cat >>/etc/hosts <<EOL
 #
 # Map t-rex endpoints to localhost
 #
-127.0.0.1	t_rex
-127.0.0.1	t_rex_rd
+127.0.0.1 t_rex
+127.0.0.1 t_rex_rd
 EOL
 ```
 
