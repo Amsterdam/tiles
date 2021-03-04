@@ -20,7 +20,7 @@ Make sure T-Rex can actually cache the files to disk:
 
 `mkdir -p cache`
 
-`sudo chown -Rf www-data:wwww-data cache`
+`sudo chown -Rf www-data:www-data cache`
 
 Bring up T-Rex to serve vector tiles in Web Mercator (EPSG:3857) projection:
 
