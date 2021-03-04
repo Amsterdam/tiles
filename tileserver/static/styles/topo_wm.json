@@ -1260,6 +1260,19 @@
             "paint": {
                 "fill-color": "#787878"
             }
+        },
+        {
+            "id": "labels_small_scale_outline",
+            "source": "basiskaart",
+            "source-layer": "labels_vlak",
+            "minzoom": 11,
+            "maxzoom": 16.9,
+            "type": "line",
+            "paint": {
+                "line-color": "#787878",
+                "line-width": 2,
+                "line-opacity": 0.7
+            }
         }
     ]
 }
