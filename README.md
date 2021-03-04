@@ -2,14 +2,15 @@
 
 ## Prepare the database
 
-Import the latest version of the basiskaart db into PostGIS:
+Import the latest version of the basiskaart db into PostGIS.
+When prompted for a password, enter 'insecure' (without quotes).
 
 `docker-compose up -d database`  
 `docker-compose exec database update-db.sh basiskaart`
 
 Create the mviews which contains the BGT en KBK10 and KBK50 data, run from the repro root dir
 
-``docker exec -it vector_tiles_t_rex_database_1 bash `psql -h localhost -p5402 -U basiskaart -d basiskaart -f ./config/database/create_all_mviews.sql` | echo please wait...``
+``psql -h localhost -p5402 -U basiskaart -d basiskaart -f ./config/database/create_all_mviews.sql``
 
 ## Serve vector tiles
 
@@ -19,7 +20,7 @@ Make sure T-Rex can actually cache the files to disk:
 
 `mkdir -p cache`
 
-`sudo chown -Rf www-data:wwww-data cache`
+`sudo chown -Rf www-data:www-data cache`
 
 Bring up T-Rex to serve vector tiles in Web Mercator (EPSG:3857) projection:
 
