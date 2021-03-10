@@ -3,7 +3,7 @@ LABEL maintainer="datapunt@amsterdam.nl"
 
 USER root
 
-RUN apt-get update && apt-get install -y jq postgresql-client
+RUN apt-get update && apt-get install -y jq
 
 USER www-data
 
